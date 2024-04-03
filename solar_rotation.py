@@ -6,8 +6,8 @@ import matplotlib.colors as mcolors
 import mpmath as mp
 mp.dps = 30  # Set decimal places for high precision calculations
 
-from matplotlib import rc
-rc('text', usetex=True)
+#from matplotlib import rc
+#rc('text', usetex=True)
 plt.rcParams.update({'xtick.labelsize': 12, 
                      'ytick.labelsize': 12,
                      'axes.labelsize': 16})#,
