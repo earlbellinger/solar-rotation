@@ -10,8 +10,8 @@ from matplotlib import rc
 rc('text', usetex=True)
 plt.rcParams.update({'xtick.labelsize': 12, 
                      'ytick.labelsize': 12,
-                     'axes.labelsize': 16,
-                     'font.family': 'cmr10'})
+                     'axes.labelsize': 16})#,
+                     #'font.family': 'cmr10'})
 
 def P_3(theta):
     return 5 * mp.cos(theta)**2 - 1
