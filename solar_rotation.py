@@ -36,7 +36,7 @@ def omega_tac(r, theta, rd1, rd3, w1, w3, deltaOmega3, deltaOmega5, B1, B3, B5, 
 def get_grid():
     r_values = np.linspace(0.5, 1, 100)
     theta_values = np.linspace(0, np.pi, 100)
-    selected_thetas = np.deg2rad([0, 15, 30, 45, 60] + 90)
+    selected_thetas = np.deg2rad(np.array([0, 15, 30, 45, 60]) + 90)
     selected_rs = [0.7, 0.75, 0.8, 0.85, 0.98]
     return r_values, theta_values, selected_thetas, selected_rs
 
