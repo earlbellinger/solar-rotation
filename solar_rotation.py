@@ -54,7 +54,7 @@ def plot_interactive(rd1, rd3, w1, w3, deltaOmega3, deltaOmega5, B1, B3, B5, C, 
     axs[0].set_xlim([0.5, 1])
     axs[0].set_xlabel(r'$r/\rm{R}_\odot$')
     axs[0].set_ylabel(r'$\Omega$ [nHz]')
-    axs[0].legend(fontsize=14)
+    axs[0].legend(fontsize=14, loc="lower left")
     
     for r in selected_rs:
         omega_theta = [omega_tac(r, theta, rd1, rd3, w1, w3, deltaOmega3, deltaOmega5, B1, B3, B5, C, Omega_c) for theta in theta_values]
@@ -62,7 +62,7 @@ def plot_interactive(rd1, rd3, w1, w3, deltaOmega3, deltaOmega5, B1, B3, B5, C, 
     axs[1].set_xlim([-90, 90])
     axs[1].set_xlabel(r'latitude $\phi$ [$^{\circ}$]')
     axs[1].set_ylabel(r'$\Omega$ [nHz]')
-    axs[1].legend(fontsize=14)
+    axs[1].legend(fontsize=14, loc="lower center")
     
     R, Theta = np.meshgrid(r_values, np.rad2deg(theta_values))
     Omega = np.vectorize(lambda r, theta: float(omega_tac(r, np.deg2rad(theta), rd1, rd3, w1, w3, deltaOmega3, deltaOmega5, B1, B3, B5, C, Omega_c)))(R, Theta)
