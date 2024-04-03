@@ -36,7 +36,7 @@ def omega_tac(r, theta, rd1, rd3, w1, w3, deltaOmega3, deltaOmega5, B1, B3, B5, 
 def get_grid():
     r_values = np.linspace(0.5, 1, 100)
     theta_values = np.linspace(0, np.pi, 100)
-    selected_thetas = np.deg2rad([0, 15, 30, 45, 60])
+    selected_thetas = np.deg2rad([0, 15, 30, 45, 60] + 90)
     selected_rs = [0.7, 0.75, 0.8, 0.85, 0.98]
     return r_values, theta_values, selected_thetas, selected_rs
 
@@ -47,7 +47,7 @@ def plot_interactive(rd1, rd3, w1, w3, deltaOmega3, deltaOmega5, B1, B3, B5, C, 
     
     for theta in selected_thetas:
         omega_r = [omega_tac(r, theta, rd1, rd3, w1, w3, deltaOmega3, deltaOmega5, B1, B3, B5, C, Omega_c) for r in r_values]
-        axs[0].plot(r_values, omega_r, lw=3, label=f'${int(round(np.rad2deg(theta), 0))}^\circ$')
+        axs[0].plot(r_values, omega_r, lw=3, label=f'${90 - int(round(np.rad2deg(theta), 0))}^\circ$')
 
     rt = rd1 + rd3 * P_3(theta)
     axs[0].axvline(rt, ls='--', c='k', lw=1.5, label=r'$r_t$')
@@ -58,19 +58,19 @@ def plot_interactive(rd1, rd3, w1, w3, deltaOmega3, deltaOmega5, B1, B3, B5, C, 
     
     for r in selected_rs:
         omega_theta = [omega_tac(r, theta, rd1, rd3, w1, w3, deltaOmega3, deltaOmega5, B1, B3, B5, C, Omega_c) for theta in theta_values]
-        axs[1].plot(np.rad2deg(theta_values), omega_theta, lw=3, label=f'${r}' + r'~\rm{R}_\odot$')
+        axs[1].plot(90 - np.rad2deg(theta_values), omega_theta, lw=3, label=f'${r}' + r'~\rm{R}_\odot$')
     axs[1].set_xlim([0, 180])
-    axs[1].set_xlabel(r'co-latitude $\theta$ [$^{\circ}$]')
+    axs[1].set_xlabel(r'latitude $\phi$ [$^{\circ}$]')
     axs[1].set_ylabel(r'$\Omega$ [nHz]')
     axs[1].legend(fontsize=14)
     
     R, Theta = np.meshgrid(r_values, np.rad2deg(theta_values))
     Omega = np.vectorize(lambda r, theta: float(omega_tac(r, np.deg2rad(theta), rd1, rd3, w1, w3, deltaOmega3, deltaOmega5, B1, B3, B5, C, Omega_c)))(R, Theta)
-    pcm = axs[2].pcolormesh(R, Theta, Omega, shading='auto', cmap='coolwarm')
+    pcm = axs[2].pcolormesh(R, 90 - Theta, Omega, shading='auto', cmap='coolwarm')
     plt.colorbar(pcm, ax=axs[2], label=r'$\Omega$ [nHz]')
     axs[2].axvline(rt, ls='--', c='k', lw=1.5, label=r'$r_t$')
     axs[2].set_xlabel(r'$r/\rm{R}_\odot$')
-    axs[2].set_ylabel(r'co-latitude $\theta$ [$^{\circ}$]')
+    axs[2].set_ylabel(r'latitude $\phi$ [$^{\circ}$]')
     axs[2].legend(loc='upper left', fontsize=14)
     
     plt.tight_layout()
