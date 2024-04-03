@@ -73,7 +73,7 @@ def plot_interactive(rd1, rd3, w1, w3, deltaOmega3, deltaOmega5, B1, B3, B5, C, 
     axs[2].set_ylabel(r'latitude $\phi$ [$^{\circ}$]')
     axs[2].legend(loc='upper left', fontsize=14)
     
-    plt.tight_layout()
+    fig.tight_layout()
     st.pyplot(fig)
 
 
